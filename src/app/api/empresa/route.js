@@ -1,6 +1,11 @@
 import { empresas } from "../../dbfake/db";
+import { prisma } from '@/lib/prisma'
 
 export async function GET() {
+
+    const empresas = await prisma.empresa.findMany()
+    console.log(empresas)
+
     return new Response(JSON.stringify({ message: 'Deu certo!', empresas }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
@@ -26,4 +31,4 @@ export async function POST(request) {
     })
 }
 
-export { empresas }
+// export { empresas }

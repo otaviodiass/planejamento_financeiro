@@ -1,18 +1,26 @@
 'use client'
 import Link from "next/link";
 import React from "react";
+// import { empresas } from "../dbfake/db";
 
 interface Empresa {
     id: number;
     nome: string;
     cnpj: string;
+    representante: string;
 }
 
 async function buscarEmpresas() {
     const response = await fetch(`http://localhost:3000/api/empresa`)
     const data: { message: string; empresas: Empresa[] } = await response.json()
+    console.log(data.empresas)
     const listaEmpresas = Array.isArray(data.empresas) ? data.empresas : [];
+    console.log(listaEmpresas)
     return listaEmpresas
+}
+
+function formatarCNPJ(cnpj:string) {
+    return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, "\$1.\$2.\$3/\$4-\$5");
 }
 
 export default function ListaEmpresas() {
@@ -39,7 +47,7 @@ export default function ListaEmpresas() {
                             <Link href={`/empresa/${encodeURIComponent(empresa.id)}`}>
                                 <div className="bg-[#F9FAFB] hover:bg-[#E0F2FE] transition p-4 rounded-lg border border-[#CBD5E1] shadow-sm cursor-pointer">
                                     <p className="font-semibold text-base font-sans text-[#1E3A8A]">{empresa.nome}</p>
-                                    <p className="text-gray-500 text-sm">{empresa.cnpj}</p>
+                                    <p className="text-gray-500 text-sm">{formatarCNPJ(empresa.cnpj)}</p>
                                 </div>
                             </Link>
                         </li>
