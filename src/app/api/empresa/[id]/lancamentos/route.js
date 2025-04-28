@@ -1,31 +1,17 @@
-import { empresas } from "../../../../dbfake/db"
-
-function buscarEmpresaPorId(idEmpresa) {
-    idEmpresa = typeof idEmpresa !== 'number' ? parseInt(idEmpresa) : idEmpresa
-    if (isNaN(idEmpresa)) return null
-    return empresas.find(empresa => empresa.id === idEmpresa)
-}
+import { buscarEmpresaId, buscarTransacoesEmpresa, criarTransacao } from '@/services/empresaService'
+import { validarId } from '@/utils/validation'
 
 export async function POST(request, { params }) {
     const { id } = await params
-    const {tipoCategoria, subCategoriaTipo, valorTransacao, dataTransacao } = await request.json()
-    const empresa = buscarEmpresaPorId(id)
+    const idEmpresa = validarId(id)
+    // const {tipoCategoria, subCategoriaTipo, valorTransacao, dataTransacao } = await request.json()
+    const dadosTransacao = await request.json()
+    const empresa = await buscarEmpresaId(idEmpresa)
 
     if (empresa) {
-        if (tipoCategoria === 'Receita') {
-            empresa.receitas.push({tipoCategoria, subCategoriaTipo, valorTransacao, dataTransacao})
-        } else if (tipoCategoria === 'Custo Fixo') {
-            empresa.custosFixos.push({tipoCategoria, subCategoriaTipo, valorTransacao, dataTransacao})
-        } else if (tipoCategoria === 'Custo Variável') {
-            empresa.custosVariaveis.push({tipoCategoria, subCategoriaTipo, valorTransacao, dataTransacao})
-        } else {
-            return new Response(JSON.stringify({ message: `Categoria: ${tipoCategoria} inválida!` }), {
-                status: 404,
-                headers: { "Content-Type": "application/json" }
-            })
-        }
+        const transacao = await criarTransacao(empresa.id, dadosTransacao)
 
-        return new Response(JSON.stringify({ message: `Dados de ${tipoCategoria} adicionados para a ${empresa.nome}`, empresa }), {
+        return new Response(JSON.stringify({ message: `Transação efetuada para a ${empresa.nome}`, transacao }), {
             status: 200,
             headers: { "Content-Type": "application/json" },
         });
@@ -39,11 +25,27 @@ export async function POST(request, { params }) {
 
 export async function GET(resquest, { params }) {
     const { id } = await params
-    const empresaSelecionada = await buscarEmpresaPorId(id)
-    console.log(typeof empresaSelecionada)
+    const idEmpresa = validarId(id)
 
-    return new Response(JSON.stringify({ message: `ID recebido ${id}`, empresa: empresaSelecionada}), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-    });
+    const empresaSelecionada = await buscarEmpresaId(idEmpresa)
+
+    if (empresaSelecionada) {
+        const resposta = await buscarTransacoesEmpresa(empresaSelecionada.id)
+
+        const transacoes = resposta.map((resp) => ({
+            id: resp.id,
+            descricao: resp.descricao,
+            valor: resp.valor,
+            data: resp.data,
+            subcategoria: resp.subcategoria.nome,
+            categoria: resp.subcategoria.categoria.nome,
+        }))
+
+        console.log('aqui na api:', transacoes)
+        return new Response(JSON.stringify({ message: `Transações da empresa: ${empresaSelecionada.nome}`, transacoes}), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+        });
+    }
+
 }

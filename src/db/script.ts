@@ -41,8 +41,23 @@ async function main() {
     //     ]
     // })
 
-    const subcategorias = await prisma.transacao.findMany()
-    console.log(subcategorias)
+    // const transacao = await prisma.empresa.findUnique({
+    //   where: {
+    //     id: 1
+    //   },
+    //   include: {
+    //     transacoes: true
+    //   }
+    // })
+    // console.log(transacao)
+
+    const transacoes = await prisma.transacao.findMany({
+      where: {
+        empresaId: 1
+      }
+    })
+
+    console.log(transacoes)
 
     // const trasacoes = await prisma.transacao.createMany({
     //     data: [{

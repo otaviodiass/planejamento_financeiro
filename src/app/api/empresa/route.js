@@ -1,10 +1,8 @@
-import { empresas } from "../../dbfake/db";
-import { prisma } from '@/lib/prisma'
+import { buscarEmpresas, criarEmpresa } from '@/services/empresaService';
 
 export async function GET() {
 
-    const empresas = await prisma.empresa.findMany()
-    console.log(empresas)
+    const empresas = await buscarEmpresas()
 
     return new Response(JSON.stringify({ message: 'Deu certo!', empresas }), {
         status: 200,
@@ -13,22 +11,11 @@ export async function GET() {
 }
 
 export async function POST(request) {
-    const { nome, cnpj } = await request.json()
+    const dadosEmpresa = await request.json()
 
-    const novaEmpresa = {
-        id: empresas.length + 1,
-        nome,
-        cnpj,
-        receitas: [], 
-        custosFixos: [], 
-        custosVariaveis: []
-    }
-
-    empresas.push(novaEmpresa)
+    const novaEmpresa = await criarEmpresa(dadosEmpresa)
 
     return new Response(JSON.stringify(novaEmpresa), {
         status: 201
     })
 }
-
-// export { empresas }

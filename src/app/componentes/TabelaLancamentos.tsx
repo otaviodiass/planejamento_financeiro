@@ -2,15 +2,17 @@
 
 import React from 'react'
 
-type Lancamento = {
-  tipoCategoria: string
-  subCategoriaTipo: string
-  valorTransacao: number
-  dataTransacao: string
+interface Transacao {
+  id: number,
+  valor: number,
+  data: string,
+  descricao: string | null,
+  subcategoria: string,
+  categoria: string,
 }
 
 interface TabelaTranspostaProps {
-  dados: Lancamento[]
+  dados: Transacao[]
 }
 
 function getAnoMes(data: string) {
@@ -25,17 +27,18 @@ function formatarMesAno(anoMes: string) {
 }
 
 export default function TabelaTransposta({ dados }: TabelaTranspostaProps) {
-  const tipos = Array.from(new Set(dados.map(l => l.tipoCategoria)))
+  console.log(dados)
+  const tipos = Array.from(new Set(dados.map(l => l.categoria)))
 
   const mesesOrdenados = Array.from(
-    new Set(dados.map(l => getAnoMes(l.dataTransacao)))
+    new Set(dados.map(l => getAnoMes(l.data)))
   ).sort()
 
   return (
     <div className="space-y-16 mt-10">
       {tipos.map(tipo => {
-        const porTipo = dados.filter(l => l.tipoCategoria === tipo)
-        const subCategorias = Array.from(new Set(porTipo.map(l => l.subCategoriaTipo)))
+        const porTipo = dados.filter(l => l.categoria === tipo)
+        const subCategorias = Array.from(new Set(porTipo.map(l => l.subcategoria)))
 
         return (
           <div key={tipo}>
@@ -58,8 +61,8 @@ export default function TabelaTransposta({ dados }: TabelaTranspostaProps) {
                       <td className="px-6 py-3 text-sm font-medium text-gray-800 w-2xs">{sub}</td>
                       {mesesOrdenados.map(mes => {
                         const total = porTipo
-                          .filter(l => l.subCategoriaTipo === sub && getAnoMes(l.dataTransacao) === mes)
-                          .reduce((acc, l) => acc + l.valorTransacao, 0)
+                          .filter(l => l.subcategoria === sub && getAnoMes(l.data) === mes)
+                          .reduce((acc, l) => acc + l.valor, 0)
 
                         const isReceita = tipo === 'Receita'
                         const cor = isReceita ? 'text-green-600' : 'text-red-600'

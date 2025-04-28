@@ -1,4 +1,5 @@
 'use client';
+import { formatarValor } from '@/utils/validation';
 import React from 'react';
 import { useState } from 'react';
 
@@ -6,25 +7,25 @@ const tipoOptions = ['Receita', 'Custo Fixo', 'Custo Variável']
 type Tipo = typeof tipoOptions[number]
 
 const subCategorias: Record<Tipo, string[]> = {
-    'Receita': ['Dinheiro', 'Crédito', 'PIX'],
+    'Receita': ['Dinheiro', 'Débito', 'Crédito', 'Crediário'],
     'Custo Fixo': ['Salário', 'FGTS', 'Aluguel'],
     'Custo Variável': ['Custo da Mercadoria', 'Imposto']
 }
 
-function formatarValor(valor: string) {
-    const somenteNumeros = valor.replace(/\D/g, '')
+// function formatarValor(valor: string) {
+//     const somenteNumeros = valor.replace(/\D/g, '')
 
-    const numero = parseFloat(somenteNumeros) / 100
+//     const numero = parseFloat(somenteNumeros) / 100
 
-    if (isNaN(numero)) return {numeroExibir: '', numero}
+//     if (isNaN(numero)) return {numeroExibir: '', numero}
 
-    const numeroExibir = numero.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-    })
+//     const numeroExibir = numero.toLocaleString('pt-BR', {
+//         style: 'currency',
+//         currency: 'BRL'
+//     })
 
-    return { numeroExibir, numero }
-}
+//     return { numeroExibir, numero }
+// }
 
 export default function FormularioInsercao({ params }: { params: { id: string } }) {
     const id = params.id
@@ -36,9 +37,8 @@ export default function FormularioInsercao({ params }: { params: { id: string } 
 
         const formData = new FormData(form)
         const data = {
-            tipoCategoria : formData.get('tipo'),
-            subCategoriaTipo : formData.get('subCategoria'),
-            valorTransacao : valor,
+            subCategoria : formData.get('subCategoria'),
+            valor : valor,
             dataTransacao : formData.get('data') 
         }
   
