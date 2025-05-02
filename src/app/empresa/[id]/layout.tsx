@@ -32,7 +32,7 @@ export default async function Layout({ children, params }: LayoutProps) {
                                 <BotaoCabecalho empresaId={id} destino="lancamentos" label="Lançamentos"></BotaoCabecalho>
                             </li>
                             <li>
-                                <BotaoCabecalho empresaId={id} destino="dashboards" label="Dashboards"></BotaoCabecalho>
+                                <BotaoCabecalho empresaId={id} destino="analise" label="Análise Financeira"></BotaoCabecalho>
                             </li>
                         </ul>
                     </nav>

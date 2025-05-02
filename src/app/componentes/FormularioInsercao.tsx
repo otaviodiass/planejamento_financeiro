@@ -9,23 +9,8 @@ type Tipo = typeof tipoOptions[number]
 const subCategorias: Record<Tipo, string[]> = {
     'Receita': ['Dinheiro', 'Débito', 'Crédito', 'Crediário'],
     'Custo Fixo': ['Salário', 'FGTS', 'Aluguel'],
-    'Custo Variável': ['Custo da Mercadoria', 'Imposto']
+    'Custo Variável': ['Custo da Mercadoria Vendida', 'Impostos - Simples Nacional', 'Despesas com Comissões']
 }
-
-// function formatarValor(valor: string) {
-//     const somenteNumeros = valor.replace(/\D/g, '')
-
-//     const numero = parseFloat(somenteNumeros) / 100
-
-//     if (isNaN(numero)) return {numeroExibir: '', numero}
-
-//     const numeroExibir = numero.toLocaleString('pt-BR', {
-//         style: 'currency',
-//         currency: 'BRL'
-//     })
-
-//     return { numeroExibir, numero }
-// }
 
 export default function FormularioInsercao({ params }: { params: { id: string } }) {
     const id = params.id
