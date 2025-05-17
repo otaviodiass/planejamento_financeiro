@@ -3,13 +3,63 @@ import { formatarValor } from '@/utils/validation';
 import React from 'react';
 import { useState } from 'react';
 
-const tipoOptions = ['Receita', 'Custo Fixo', 'Custo Variável']
+const tipoOptions = ['Receita', 'Custo Variável', 'Custo Fixo']
 type Tipo = typeof tipoOptions[number]
 
 const subCategorias: Record<Tipo, string[]> = {
-    'Receita': ['Dinheiro', 'Débito', 'Crédito', 'Crediário'],
-    'Custo Fixo': ['Salários Funcionários', 'Recolhimento de FGTS'],
-    'Custo Variável': ['Custo da Mercadoria Vendida', 'Impostos - Simples Nacional', 'Despesas com Comissões']
+    'Receita': ['Dinheiro', 'Débito', 'Crédito', 'Crediário', 'Pix', 'Cheque'],
+    'Custo Variável': [
+        'Custo da Mercadoria Vendida', 
+        'Impostos - Simples Nacional', 
+        'Despesas com Comissões',
+        'Despesas com Produtos',
+        'ICMS Difal',
+        'Juros Antecipação',
+        'Tarifa Boleto',
+        'Comissão'
+    ],
+    'Custo Fixo': [
+        'Salários Funcionários', 
+        'Recolhimento de FGTS',
+        '13º e Férias',
+        'Acertos e Rescisões',
+        'Pro labores',
+        'Padaria',
+        'Frete',
+        'Serasa',
+        'Água',
+        'Energia',
+        'Internet',
+        'Sistema',
+        'Honorarios Contábeis',
+        'Viagens',
+        'Plano de Saúde',
+        'Despesas com Veículos: Combustíveis',
+        'Despesas com Veículos: IPVA + Licenciamento',
+        'Despesas com Veículos: Manutenção',
+        'Despesas com Veículos: Multas',
+        'Uniforme',
+        'Exames Admissionais /Demissionais /Periódicos',
+        'Sindicato - Empresa',
+        'Sindicato - Funcinários',
+        'Alimentação - Funcionários',
+        'Associação de Classes',
+        'Material de limpeza, higiene, mercado, escritório',
+        'Conservação das Instalações',
+        'Tarifas Bancarias',
+        'Aluguel Sistema de Informação',
+        'Despesas de Viagem',
+        'Lazer - Sócios e Funcionários',
+        'Seguro - Predial',
+        'Doação e Brindes',
+        'Vigilancia',
+        'Publicidade',
+        'Caixinha',
+        'Gráfica',
+        'CIEE',
+        'Seguro Loja',
+        'Seguro Carro'
+    ],
 }
 
 export default function FormularioInsercao({ params }: { params: { id: string } }) {
