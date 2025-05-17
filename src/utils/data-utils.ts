@@ -1,4 +1,4 @@
-export function getAnoMes(data: string) {
+export function getAnoMes(data: string):string {
     const date = new Date(data)
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
 }

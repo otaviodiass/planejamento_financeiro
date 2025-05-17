@@ -41,7 +41,6 @@ export async function GET(resquest, { params }) {
             categoria: resp.subcategoria.categoria.nome,
         }))
 
-        console.log('aqui na api:', transacoes)
         return new Response(JSON.stringify({ message: `Transações da empresa: ${empresaSelecionada.nome}`, transacoes}), {
             status: 200,
             headers: { "Content-Type": "application/json" },

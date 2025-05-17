@@ -1,7 +1,7 @@
 'use client'
 
 import { buscarTransacaoEmpresa } from '@/lib/api'
-import { calcularMargemDeContribuicao, calcularMargemDeContribuicaoAnual } from '@/utils/indicadores';
+import { totalPorCategoriaMensalAnual, calcularMargemContribuicao, calcularResultadoOperacional, calcularReceitaEOperacional } from '@/utils/indicadores';
 import { useEffect, useState } from 'react'
 
 interface Props {
@@ -20,13 +20,13 @@ interface Transacao {
 function getAnoMes(data: string) {
     const date = new Date(data)
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
-  }
-  
-  function formatarMesAno(anoMes: string) {
+}
+
+function formatarMesAno(anoMes: string) {
     const [ano, mes] = anoMes.split('-')
     const data = new Date(Number(ano), Number(mes) - 1)
     return data.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })
-  }
+}
 
 export default function TabelaResumo({ id }: Props) {
 
@@ -38,28 +38,20 @@ export default function TabelaResumo({ id }: Props) {
         })
     }, [id])
 
-    const categoria = Array.from(new Set(transacoes.map(t => t.categoria)))
+    const c = calcularReceitaEOperacional(transacoes)
+    console.log('gráfico', c)
+
     const meses = Array.from(new Set(transacoes.map(t => getAnoMes(t.data)))).sort()
 
-    const margemPorMes = calcularMargemDeContribuicao(transacoes)
-    const { margemAnual } = calcularMargemDeContribuicaoAnual(transacoes)
+    const resp = totalPorCategoriaMensalAnual(transacoes)
 
-    const resumo = categoria.map(categoria => {
-        const valoresPorMes = meses.map(mes => {
-            const total = transacoes
-                .filter(t => t.categoria === categoria && getAnoMes(t.data) === mes)
-                .reduce((acc, t) => acc + t.valor, 0)
-            return total
-        })
+    const receita = resp.filter(r => r.categoria === "Receita")[0]
+    const custoVariavel = resp.filter(cv => cv.categoria === "Custo Variável")[0]
+    const custoFixo = resp.filter(cf => cf.categoria === "Custo Fixo")[0]
 
-        const totalAnual = valoresPorMes.reduce((acc, val) => acc + val, 0)
+    const margemContribuicao = calcularMargemContribuicao(receita, custoVariavel)
 
-        return {
-            categoria,
-            valoresPorMes,
-            totalAnual
-        }
-    })
+    const resulOp = calcularResultadoOperacional(receita, custoFixo, custoVariavel)
 
     return (
         <div className='m-10'>
@@ -76,32 +68,78 @@ export default function TabelaResumo({ id }: Props) {
                         </tr>
                     </thead>
                     <tbody className='bg-white divide-y divide-gray-100'>
-                        {resumo.map(({ categoria, valoresPorMes, totalAnual }) => (
-                            <tr key={categoria}>
-                                <td className='px-6 py-3 text-sm font-medium text-gray-800'>{categoria}</td>
-                                {valoresPorMes.map((valor, i) => (
-                                    <td key={i} className={`px-6 py-3 text-sm font-semibold text-center hover:bg-gray-100 transition-colors duration-200 ${
-                                        valor > 0 ? 'text-blue-700' : 'text-gray-400'
-                                      }`}>
-                                        {valor > 0 ? valor.toLocaleString('pt-BR',  { style: 'currency', currency: 'BRL' }) : '-'}
-                                    </td>
-                                ))}
-                                <td className="px-6 py-3 text-sm font-semibold text-center text-blue-700">
-                                    {totalAnual > 0 ? totalAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '-'}
-                                </td>
-                            </tr>
-                        ))}
-                        <tr>
-                            <td className="px-6 py-3 text-sm text-gray-800">Margem de Contribuição</td>
-                            {margemPorMes.map(({ mes, valor, percentual }) => (
-                                <td key={mes} className={`px-6 py-3 text-sm font-semibold text-center ${percentual > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                    {percentual.toFixed(1)}%
+                        {receita && (
+                            <tr>
+                            <td className="px-6 py-3 text-sm font-medium text-gray-800">Receita</td>
+                            {receita.valoresPorMes.map((valor, i) => (
+                                <td key={i} className={`px-6 py-3 text-sm font-semibold text-center hover:bg-gray-100 transition-colors duration-200 ${
+                                    valor > 0 ? 'text-blue-700' : 'text-gray-400'
+                                  }`}>
+                                {valor > 0 ? valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '-'}
                                 </td>
                             ))}
-                            <td className={`px-6 py-3 text-sm font-semibold text-center ${margemAnual > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                {margemAnual > 0 ? margemAnual.toLocaleString('pt-BR',  { style: 'currency', currency: 'BRL' }) : '-'}
+                            <td className="px-6 py-3 text-sm font-semibold text-center text-blue-700">
+                                {receita.totalAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                            </td>
+                            </tr>
+                        )}
+                        {custoVariavel && (
+                            <tr>
+                            <td className="px-6 py-3 text-sm font-medium text-gray-800">Custo Variável</td>
+                            {custoVariavel.valoresPorMes.map((valor, i) => (
+                                <td key={i} className={`px-6 py-3 text-sm font-semibold text-center hover:bg-gray-100 transition-colors duration-200 ${
+                                    valor > 0 ? 'text-blue-700' : 'text-gray-400'
+                                  }`}>
+                                {valor > 0 ? valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '-'}
+                                </td>
+                            ))}
+                            <td className="px-6 py-3 text-sm font-semibold text-center text-blue-700">
+                                {custoVariavel.totalAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                            </td>
+                            </tr>
+                        )}
+                        <tr>
+                            <td className="px-6 py-3 text-sm text-gray-800">Margem de Contribuição</td>
+                            {margemContribuicao.valoresPorMes.map((valor, indice) => (
+                                <td key={indice} className={`px-6 py-3 text-sm font-semibold text-center ${valor > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                    {valor.toLocaleString('pt-BR',  { style: 'currency', currency: 'BRL' })}
+                                </td>
+                            ))}
+                            <td className={`px-6 py-3 text-sm font-semibold text-center ${margemContribuicao.totalAnual > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                {margemContribuicao.totalAnual > 0 ? margemContribuicao.totalAnual.toLocaleString('pt-BR',  { style: 'currency', currency: 'BRL' }) : '-'}
                             </td>
                         </tr>
+                        {custoFixo && (
+                            <tr>
+                            <td className="px-6 py-3 text-sm font-medium text-gray-800">Custo Fixo</td>
+                            {custoFixo.valoresPorMes.map((valor, i) => (
+                                <td key={i} className={`px-6 py-3 text-sm font-semibold text-center hover:bg-gray-100 transition-colors duration-200 ${
+                                    valor > 0 ? 'text-blue-700' : 'text-gray-400'
+                                  }`}>
+                                {valor > 0 ? valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '-'}
+                                </td>
+                            ))}
+                            <td className="px-6 py-3 text-sm font-semibold text-center text-blue-700">
+                                {custoFixo.totalAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                            </td>
+                            </tr>
+                        )}
+                         {resulOp && (
+                            <tr>
+                            <td className="px-6 py-3 text-sm font-medium text-gray-800">Resultado Operacional</td>
+                            {resulOp.valoresPorMes.map((valor, indice) => (
+                                <td key={indice} className={`px-6 py-3 text-sm font-semibold text-center hover:bg-gray-100 transition-colors duration-200 ${
+                                    valor > 0 ? 'text-blue-700' : 'text-red-600'
+                                  }`}>
+                                {/* {valor > 0 ? valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '-'} */}
+                                {valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                </td>
+                            ))}
+                            <td className="px-6 py-3 text-sm font-semibold text-center text-blue-700">
+                                {resulOp.totalAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                            </td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>

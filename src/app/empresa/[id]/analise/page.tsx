@@ -1,3 +1,4 @@
+import GraficoAnalise from "@/app/componentes/GraficoAnalise";
 import TabelaResumo from "@/app/componentes/TabelaResumo"
 import { buscarTransacaoEmpresa } from "@/lib/api";
 
@@ -22,6 +23,9 @@ async function buscarTransacao(id: string) {
 export default async function PaginaAnalise({ params }: Props) {
     const { id } = await params
     return (
-        <TabelaResumo id={id}></TabelaResumo>
+        <div>
+            <TabelaResumo id={id}></TabelaResumo>
+            <GraficoAnalise id={id}></GraficoAnalise>
+        </div>
     )
 }

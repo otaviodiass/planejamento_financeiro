@@ -45,8 +45,8 @@ export default function TabelaTransposta({ dados }: TabelaTranspostaProps) {
         return (
           <div key={tipo}>
             <h2 className="text-2xl font-bold mb-6 text-blue-800">{tipo}</h2>
-            <div className="w-[1000px] overflow-x-auto rounded-xl shadow-md border border-gray-200">
-              <table className="min-w-full divide-y divide-gray-200">
+            <div className="w-full overflow-x-auto rounded-xl shadow-md border border-gray-200">
+              <table className="w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">SubCategoria</th>

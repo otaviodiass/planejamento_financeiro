@@ -8,7 +8,7 @@ type Tipo = typeof tipoOptions[number]
 
 const subCategorias: Record<Tipo, string[]> = {
     'Receita': ['Dinheiro', 'Débito', 'Crédito', 'Crediário'],
-    'Custo Fixo': ['Salário', 'FGTS', 'Aluguel'],
+    'Custo Fixo': ['Salários Funcionários', 'Recolhimento de FGTS'],
     'Custo Variável': ['Custo da Mercadoria Vendida', 'Impostos - Simples Nacional', 'Despesas com Comissões']
 }
 
