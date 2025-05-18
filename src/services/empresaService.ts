@@ -85,3 +85,16 @@ export async function criarTransacao(id: number, dadosTransacao: Transacao) {
         }
     })
 }
+
+export async function editarEmpresa(id: number, dadosNovosEmpresa: Empresa) {
+    const empresaAtualizada = await prisma.empresa.update({
+        where: { id },
+        data: {
+            nome: dadosNovosEmpresa.nome,
+            cnpj: dadosNovosEmpresa.cnpj,
+            representante: dadosNovosEmpresa.representante
+        }
+    })
+
+    return empresaAtualizada
+}

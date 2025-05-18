@@ -54,7 +54,7 @@ export default function TabelaResumo({ id }: Props) {
     const resulOp = calcularResultadoOperacional(receita, custoFixo, custoVariavel)
 
     return (
-        <div className='m-10'>
+        <div className='m-8'>
             <h2 className="text-2xl font-bold mb-6 text-blue-800">Resumo</h2>
             <div className='w-full overflow-x-auto rounded-xl shadow-md border border-gray-200'>
                 <table className="w-full table-auto divide-y divide-gray-200">

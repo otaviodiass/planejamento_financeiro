@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 interface Props {
@@ -42,6 +43,11 @@ export default async function EmpresaPage({ params }: Props) {
                     </tbody>
                 </table>
             </div>
+            <Link href={`/empresa/${id}/editar`}>
+                <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    Editar Dados
+                </button>
+            </Link>
         </div>
     )
 }

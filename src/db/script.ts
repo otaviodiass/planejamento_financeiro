@@ -191,109 +191,207 @@ async function main() {
   //   ]
   // })
 
-  // const trasacoesFixo = await prisma.transacao.createMany({
-  //     data: [{
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 8,
-  //         valor: 17311.64
-  //     }, {
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 9,
-  //         valor: 2185.62
-  //     }, {
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 17,
-  //         valor: 2998.36
-  //     }, {
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 18,
-  //         valor: 6584.07
-  //     }, {
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 19,
-  //         valor: 13500.00
-  //     }, {
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 20,
-  //         valor: 450.00
-  //     }, {
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 21,
-  //         valor: 290.91
-  //     }, {
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 22,
-  //         valor: 86.98
-  //     }, {
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 23,
-  //         valor: 30.00
-  //     }, {
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 24,
-  //         valor: 500.00
-  //     }, {
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 25,
-  //         valor: 119.00
-  //     }, {
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 26,
-  //         valor: 522.90
-  //     }, {
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 27,
-  //         valor: 900.00
-  //     }, {
-  //         data: formatarData('2025-01-10'),
-  //         empresaId: 1,
-  //         subcategoriaId: 28,
-  //         valor: 470.00
-  //     }]
-  // })
+//   const trasacoesFixo = await prisma.transacao.createMany({
+// data: [{
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 8,
+//     valor: 17248.25
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 9,
+//     valor: 1721.56
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 17,
+//     valor: 3669.01
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 18,
+//     valor: 0.00
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 19,
+//     valor: 13500.00
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 20,
+//     valor: 450.00
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 21,
+//     valor: 306.63
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 22,
+//     valor: 86.98
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 23,
+//     valor: 30.00
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 24,
+//     valor: 500.00
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 25,
+//     valor: 134.00
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 26,
+//     valor: 522.90
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 27,
+//     valor: 900.00
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 28,
+//     valor: 470.00
+// }, {
+//     data: formatarData('2025-09-10'),
+//     empresaId: 1,
+//     subcategoriaId: 29,
+//     valor: 2154.06
+// }]
 
-  const trasacoesVariaveis = await prisma.transacao.createMany({
-      data: [{
-          data: formatarData('2025-02-10'),
-          empresaId: 1,
-          subcategoriaId: 5,
-          valor: 152943.94
-      }, {
-          data: formatarData('2025-02-10'),
-          empresaId: 1,
-          subcategoriaId: 6,
-          valor: 32503.45
-      },{
-          data: formatarData('2025-02-10'),
-          empresaId: 1,
-          subcategoriaId: 7,
-          valor: 13149.80
-      },{
-          data: formatarData('2025-02-10'),
-          empresaId: 1,
-          subcategoriaId: 12,
-          valor: 1000.00
-      },{
-          data: formatarData('2025-02-10'),
-          empresaId: 1,
-          subcategoriaId: 13,
-          valor: 5803.55
-      },]
-  })
+//   })
 
+
+
+//   const trasacoesVariaveis = await prisma.transacao.createMany({
+// data: [{
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 8,
+//     valor: 17771.01
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 9,
+//     valor: 2235.02
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 17,
+//     valor: 7490.57
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 18,
+//     valor: 0.00
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 19,
+//     valor: 13500.00
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 20,
+//     valor: 450.00
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 21,
+//     valor: 0.00
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 22,
+//     valor: 86.98
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 23,
+//     valor: 30.00
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 24,
+//     valor: 500.00
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 25,
+//     valor: 134.00
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 26,
+//     valor: 522.90
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 27,
+//     valor: 900.00
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 28,
+//     valor: 470.00
+// }, {
+//     data: formatarData('2025-12-10'),
+//     empresaId: 1,
+//     subcategoriaId: 29,
+//     valor: 1532.06
+// }]
+
+
+//   })
+
+
+
+
+//   const trasacoesRenda = await prisma.transacao.createMany({
+// data: [{
+//     data: formatarData('2025-10-10'),
+//     empresaId: 1,
+//     subcategoriaId: 1,
+//     valor: 72151.01
+// }, {
+//     data: formatarData('2025-10-10'),
+//     empresaId: 1,
+//     subcategoriaId: 2,
+//     valor: 12263.00
+// }, {
+//     data: formatarData('2025-10-10'),
+//     empresaId: 1,
+//     subcategoriaId: 3,
+//     valor: 118323.86
+// }, {
+//     data: formatarData('2025-10-10'),
+//     empresaId: 1,
+//     subcategoriaId: 4,
+//     valor: 139930.76
+// }, {
+//     data: formatarData('2025-10-10'),
+//     empresaId: 1,
+//     subcategoriaId: 10,
+//     valor: 70206.69
+// }, {
+//     data: formatarData('2025-10-10'),
+//     empresaId: 1,
+//     subcategoriaId: 11,
+//     valor: 0.00
+// }]
+
+
+//   })
   
 }
 

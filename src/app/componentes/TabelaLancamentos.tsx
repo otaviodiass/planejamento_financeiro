@@ -34,7 +34,7 @@ export default function TabelaTransposta({ dados }: TabelaTranspostaProps) {
   ).sort()
 
   return (
-    <div className="space-y-16 mt-10">
+    <div className="space-y-16 m-8 overflow-x-auto">
       {tipos.map(tipo => {
         const porTipo = dados.filter(l => l.categoria === tipo)
         const subCategorias = Array.from(new Set(porTipo.map(l => l.subcategoria)))
