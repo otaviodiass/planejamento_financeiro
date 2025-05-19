@@ -11,6 +11,16 @@ interface Transacao {
     subCategoria: string;
     valor: number;
     dataTransacao: string;
+    descricao: string;
+}
+
+interface TransacaoDois {
+  id: number
+  valor: number
+  data: string
+  descricao: string | null
+  categoria: string
+  subcategoria: string
 }
 
 async function buscarSubCategoriaPorNome(nome: string) {
@@ -97,4 +107,28 @@ export async function editarEmpresa(id: number, dadosNovosEmpresa: Empresa) {
     })
 
     return empresaAtualizada
+}
+
+export async function buscarTransacao(idTransacao:number) {
+    const transacao = await prisma.transacao.findFirst({
+        where: { id: idTransacao }
+    })
+
+    console.log('transacao', transacao)
+
+    return transacao
+}
+
+
+export async function editarTransacao(id: number, dadosTransacao: TransacaoDois) {
+    const transacaoAtualizada = await prisma.transacao.update({
+        where: { id: id },
+        data: {
+            descricao: dadosTransacao.descricao,
+            valor: dadosTransacao.valor,
+            data: new Date(dadosTransacao.data),
+        }
+    })
+
+    return transacaoAtualizada
 }

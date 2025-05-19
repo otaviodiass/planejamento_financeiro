@@ -1,5 +1,6 @@
 import TabelaLancamentos from "@/app/componentes/TabelaLancamentos"
 import { buscarTransacaoEmpresa } from "@/lib/api";
+import Link from "next/link";
 
 interface Props {
     params: { id: string }
@@ -14,12 +15,6 @@ interface Transacao {
   categoria: string,
 }
 
-// async function buscarEmpresa(id: string) {
-//     const response = await fetch(`http://localhost:3000/api/empresa/${id}/lancamentos`)
-//     const data: { message: string; transacoes: Transacao[] } = await response.json()
-//     return data.transacoes
-// }
-
 async function buscarEmpresa(id: string) {
     const data: { message: string; transacoes: Transacao[] } = await buscarTransacaoEmpresa(id)
     return data.transacoes
@@ -30,6 +25,12 @@ export default async function PaginaLancamentos({ params }: Props) {
     const dados = await buscarEmpresa(id)
     return (
         <div className="flex justify-center">
+            <Link href={`/empresa/${id}/lancamentos/editar`}>
+                <button className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800 mt-4">
+                    Editar Lançamentos
+                </button>
+            </Link>
+
             <TabelaLancamentos dados={dados}></TabelaLancamentos>
         </div>
     )
