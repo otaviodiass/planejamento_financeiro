@@ -36,7 +36,8 @@ export default function PaginaEditarLancamento() {
       const res = await fetch(`http://localhost:3000/api/empresa/${id}/lancamentos/${idLancamento}`)
       if (res.ok) {
         const json = await res.json()
-        const t = json.transacao
+        const t = json.transacaoSelecionada
+        console.log('t aqui no editar', t)
         console.log('t', t)
         setTransacao(t)
         setDescricao(t.descricao || "")

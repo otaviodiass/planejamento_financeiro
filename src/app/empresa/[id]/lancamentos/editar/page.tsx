@@ -122,11 +122,17 @@ export default function PaginaEdicaoLancamentos({ params }: Props) {
               <td className="border border-gray-300 px-4 py-2">{transacao.descricao}</td>
               <td className="border border-gray-300 px-4 py-2 text-center">
                 <Link href={`/empresa/${id}/lancamentos/${transacao.id}/editar`}>
-                  <button className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm">
+                  <button className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm m-1">
                     Editar
                   </button>
                 </Link>
+                <Link href={`/empresa/${id}/lancamentos/${transacao.id}/excluir`}>
+                  <button className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm m-1">
+                    Excluir
+                  </button>
+                </Link>
               </td>
+              
             </tr>
           ))}
           {dadosFiltrados.length === 0 && (

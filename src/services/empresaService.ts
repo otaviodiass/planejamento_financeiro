@@ -111,7 +111,14 @@ export async function editarEmpresa(id: number, dadosNovosEmpresa: Empresa) {
 
 export async function buscarTransacao(idTransacao:number) {
     const transacao = await prisma.transacao.findFirst({
-        where: { id: idTransacao }
+        where: { id: idTransacao },
+        include: {
+            subcategoria: {
+                include: {
+                    categoria: true
+                }
+            }
+        }
     })
 
     console.log('transacao', transacao)
@@ -131,4 +138,12 @@ export async function editarTransacao(id: number, dadosTransacao: TransacaoDois)
     })
 
     return transacaoAtualizada
+}
+
+export async function deletarTransacao(id: number) {
+    const transacao = await prisma.transacao.delete({
+        where: { id: id }
+    })
+
+    return transacao
 }

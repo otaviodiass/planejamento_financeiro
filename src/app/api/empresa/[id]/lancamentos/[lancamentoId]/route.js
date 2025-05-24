@@ -1,11 +1,11 @@
-import { buscarEmpresaId, buscarTransacao, editarTransacao } from '@/services/empresaService'
+import { buscarEmpresaId, buscarTransacao, editarTransacao, deletarTransacao } from '@/services/empresaService'
 import { validarId } from '@/utils/validation'
 
 export async function GET(resquest, { params }) {
     const { id, lancamentoId } = await params
     const idEmpresa = validarId(id)
     const idLancamento = validarId(lancamentoId)
-    console.log('chamou aqui', id)
+    console.log('chamou aqui', idLancamento, idEmpresa)
 
     const empresaSelecionada = await buscarEmpresaId(idEmpresa)
 
@@ -21,7 +21,16 @@ export async function GET(resquest, { params }) {
         //     categoria: resp.subcategoria.categoria.nome,
         // }))
 
-        return new Response(JSON.stringify({ message: `Transações da empresa: ${empresaSelecionada.nome}`, transacao}), {
+        const transacaoSelecionada = {
+          id: transacao.id,
+          valor: transacao.valor,
+          data: transacao.data,
+          descricao: transacao.descricao,
+          subcategoria: transacao.subcategoria?.nome ?? "",
+          categoria: transacao.subcategoria?.categoria?.nome ?? "",
+        }
+
+        return new Response(JSON.stringify({ message: `Transações da empresa: ${empresaSelecionada.nome}`, transacaoSelecionada}), {
             status: 200,
             headers: { "Content-Type": "application/json" },
         });
@@ -47,3 +56,22 @@ export async function PUT(request, { params }) {
   })
 }
 
+export async function DELETE(request, { params }) {
+  const { id, lancamentoId } = await params
+
+  const idEmpresaValido = validarId(id)
+  const idLancamentoValido = validarId(lancamentoId)
+
+  const empresaSelecionada = await buscarEmpresaId(idEmpresaValido)
+
+  if (empresaSelecionada) {
+
+    const transacaoDeletada = deletarTransacao(idLancamentoValido)
+
+    return new Response(JSON.stringify({ message: `Transações da empresa: ${empresaSelecionada.nome}`, transacaoDeletada}), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+    });
+  }
+
+}
