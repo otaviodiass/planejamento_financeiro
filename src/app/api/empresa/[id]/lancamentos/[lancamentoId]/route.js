@@ -12,22 +12,13 @@ export async function GET(resquest, { params }) {
     if (empresaSelecionada) {
         const transacao = await buscarTransacao(idLancamento)
 
-        // const transacoes = resposta.map((resp) => ({
-        //     id: resp.id,
-        //     descricao: resp.descricao,
-        //     valor: resp.valor,
-        //     data: resp.data,
-        //     subcategoria: resp.subcategoria.nome,
-        //     categoria: resp.subcategoria.categoria.nome,
-        // }))
-
         const transacaoSelecionada = {
           id: transacao.id,
           valor: transacao.valor,
           data: transacao.data,
           descricao: transacao.descricao,
-          subcategoria: transacao.subcategoria?.nome ?? "",
-          categoria: transacao.subcategoria?.categoria?.nome ?? "",
+          subcategoriaId: transacao.subcategoria.id,
+          categoriaId: transacao.subcategoria.categoriaId,
         }
 
         return new Response(JSON.stringify({ message: `Transações da empresa: ${empresaSelecionada.nome}`, transacaoSelecionada}), {

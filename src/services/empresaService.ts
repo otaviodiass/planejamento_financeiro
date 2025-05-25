@@ -21,6 +21,7 @@ interface TransacaoDois {
   descricao: string | null
   categoria: string
   subcategoria: string
+  subcategoriaId: number
 }
 
 async function buscarSubCategoriaPorNome(nome: string) {
@@ -114,8 +115,10 @@ export async function buscarTransacao(idTransacao:number) {
         where: { id: idTransacao },
         include: {
             subcategoria: {
-                include: {
-                    categoria: true
+                select: {
+                    id: true,
+                    nome: true,
+                    categoriaId: true
                 }
             }
         }
@@ -131,6 +134,7 @@ export async function editarTransacao(id: number, dadosTransacao: TransacaoDois)
     const transacaoAtualizada = await prisma.transacao.update({
         where: { id: id },
         data: {
+            subcategoriaId: dadosTransacao.subcategoriaId,
             descricao: dadosTransacao.descricao,
             valor: dadosTransacao.valor,
             data: new Date(dadosTransacao.data),
@@ -146,4 +150,14 @@ export async function deletarTransacao(id: number) {
     })
 
     return transacao
+}
+
+export async function buscarCategorias() {
+    const categorias = await prisma.categoria.findMany({})
+    return categorias
+}
+
+export async function buscarSubcategorias() {
+    const subcategorias = await prisma.subcategoria.findMany({})
+    return subcategorias
 }
