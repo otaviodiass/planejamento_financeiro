@@ -27,7 +27,13 @@ function formatarMesAno(anoMes: string) {
 }
 
 export default function TabelaTransposta({ dados }: TabelaTranspostaProps) {
-  const tipos = Array.from(new Set(dados.map(l => l.categoria)))
+  // const tipos = Array.from(new Set(dados.map(l => l.categoria)))
+
+  const ordemCategorias = ["Receita", "Custo Variável", "Custo Fixo"]
+
+  const tipos = ordemCategorias.filter(tipo => 
+    dados.some(l => l.categoria === tipo)
+  )
 
   const mesesOrdenados = Array.from(
     new Set(dados.map(l => getAnoMes(l.data)))

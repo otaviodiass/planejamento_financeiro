@@ -25,13 +25,12 @@ export default async function PaginaLancamentos({ params }: Props) {
     const dados = await buscarEmpresa(id)
     return (
         <div className="flex justify-center">
+            <TabelaLancamentos dados={dados}></TabelaLancamentos>
             <Link href={`/empresa/${id}/lancamentos/editar`}>
-                <button className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800 mt-4">
+                <button className="m-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                     Editar Lançamentos
                 </button>
             </Link>
-
-            <TabelaLancamentos dados={dados}></TabelaLancamentos>
         </div>
     )
 }

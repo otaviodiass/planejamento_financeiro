@@ -1,3 +1,4 @@
+import { TraceState } from "next/dist/trace";
 import { getAnoMes } from "./data-utils";
 
 interface Transacao {
@@ -90,4 +91,61 @@ export function calcularReceitaEOperacional(transacoes: Transacao[]) {
         // return dados
         return { receita: receita.valoresPorMes, resultadoOperacional: resultadoOperacional.valoresPorMes }
     }
+}
+
+export function calcularMargemLucro(transacoes: Transacao[]) {
+    const totalPorCategoria = totalPorCategoriaMensalAnual(transacoes)
+    
+    const receita = totalPorCategoria.filter(r => r.categoria === "Receita")[0]
+    const custoVariavel = totalPorCategoria.filter(cv => cv.categoria === "Custo Variável")[0]
+    const custoFixo = totalPorCategoria.filter(cf => cf.categoria === "Custo Fixo")[0]
+
+    if (!receita || !custoVariavel || !custoFixo) {
+        return 0
+    } else {
+        const lucro = receita.totalAnual - custoVariavel.totalAnual - custoFixo.totalAnual
+    
+        const margem = receita.totalAnual > 0 ? (lucro / receita.totalAnual) * 100 : 0
+    
+        return margem
+    }
+}
+
+export function calcularPontoEquilibrio(transacoes: Transacao[]) {
+    const totalPorCategoria = totalPorCategoriaMensalAnual(transacoes)
+
+    const receita = totalPorCategoria.filter(r => r.categoria === "Receita")[0]
+    const custoVariavel = totalPorCategoria.filter(cv => cv.categoria === "Custo Variável")[0]
+    const custoFixo = totalPorCategoria.filter(cf => cf.categoria === "Custo Fixo")[0]
+
+    if (!receita || !custoVariavel || !custoFixo) {
+        return 0
+    } else {
+        const margemContribuicao = (receita.totalAnual - custoVariavel.totalAnual) / receita.totalAnual
+    
+        const pontoEquilibrio = custoFixo.totalAnual / margemContribuicao
+    
+        return pontoEquilibrio
+    }
+}
+
+export function calcularCrescimentoReceita(transacoes: Transacao[]) {
+    const crescimento = []
+    const totalPorCategoria = totalPorCategoriaMensalAnual(transacoes)
+
+    const receita = totalPorCategoria.filter(r => r.categoria === "Receita")[0]
+
+    console.log('receitaaaaaaaaaaa', receita)
+
+    // ((receitaAtual - receitaAnterior) / receitaAnterior) * 100
+
+    for (let index = 0; index < receita.valoresPorMes.length; index++) {
+        const anterior = receita.valoresPorMes[index - 1]
+        const atual = receita.valoresPorMes[index]
+
+        const crescimentoAtual = anterior > 0 ? ((atual - anterior) / anterior) * 100 : 0
+        crescimento.push(crescimentoAtual)
+    }
+
+    return crescimento
 }

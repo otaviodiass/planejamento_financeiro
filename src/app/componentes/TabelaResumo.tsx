@@ -72,9 +72,7 @@ export default function TabelaResumo({ id }: Props) {
                             <tr>
                             <td className="px-6 py-3 text-sm font-medium text-gray-800">Receita</td>
                             {receita.valoresPorMes.map((valor, i) => (
-                                <td key={i} className={`px-6 py-3 text-sm font-semibold text-center hover:bg-gray-100 transition-colors duration-200 ${
-                                    valor > 0 ? 'text-blue-700' : 'text-gray-400'
-                                  }`}>
+                                <td key={i} className={`px-6 py-3 text-sm font-semibold text-center hover:bg-gray-100 transition-colors duration-200 ${valor > 0 ? 'text-blue-700' : 'text-gray-400'}`}>
                                 {valor > 0 ? valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '-'}
                                 </td>
                             ))}
