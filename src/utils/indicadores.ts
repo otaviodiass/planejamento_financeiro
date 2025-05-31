@@ -135,17 +135,56 @@ export function calcularCrescimentoReceita(transacoes: Transacao[]) {
 
     const receita = totalPorCategoria.filter(r => r.categoria === "Receita")[0]
 
+
     console.log('receitaaaaaaaaaaa', receita)
 
     // ((receitaAtual - receitaAnterior) / receitaAnterior) * 100
 
-    for (let index = 0; index < receita.valoresPorMes.length; index++) {
-        const anterior = receita.valoresPorMes[index - 1]
-        const atual = receita.valoresPorMes[index]
-
-        const crescimentoAtual = anterior > 0 ? ((atual - anterior) / anterior) * 100 : 0
-        crescimento.push(crescimentoAtual)
+    if (!receita){
+        return []
+    } else {
+        for (let index = 0; index < receita.valoresPorMes.length; index++) {
+            const anterior = receita.valoresPorMes[index - 1]
+            const atual = receita.valoresPorMes[index]
+    
+            const crescimentoAtual = anterior > 0 ? ((atual - anterior) / anterior) * 100 : 0
+            crescimento.push(crescimentoAtual)
+        }
+        return crescimento
     }
+}
 
-    return crescimento
+export function receitaVsDespesas(transacoes: Transacao[]) {
+    const totalPorCategoria = totalPorCategoriaMensalAnual(transacoes)
+
+    const receita = totalPorCategoria.filter(r => r.categoria === "Receita")[0]
+    const custoVariavel = totalPorCategoria.filter(cv => cv.categoria === "Custo Variável")[0]
+    const custoFixo = totalPorCategoria.filter(cf => cf.categoria === "Custo Fixo")[0]
+
+    const meses = Array.from(new Set(transacoes.map(t => getAnoMes(t.data)))).sort()
+
+    if (!receita || !custoVariavel || !custoFixo) {
+        return []
+    } else {
+        const dados = meses.map((mes, i) => ({
+            mes,
+            receita: receita.valoresPorMes[i] || 0,
+            custoFixo: custoFixo.valoresPorMes[i] || 0,
+            custoVariavel: custoVariavel.valoresPorMes[i] || 0,
+            margemLucro: margemLucro(receita.valoresPorMes[i], custoVariavel.valoresPorMes[i], custoFixo.valoresPorMes[i])
+        }))
+        return dados
+    }
+}
+
+export function margemLucro(receita: number, custoVariavel: number, custoFixo: number) {
+    if (!receita || !custoVariavel || !custoFixo) {
+        return 0
+    } else {
+        const lucro = receita - custoVariavel - custoFixo
+    
+        const margem = receita > 0 ? (lucro / receita) * 100 : 0
+    
+        return margem
+    }
 }

@@ -2,6 +2,7 @@ import CrescimentoReceita from "@/app/componentes/CrescimentoReceita";
 import GraficoAnalise from "@/app/componentes/GraficoAnalise";
 import IndicadorMargemLucro from "@/app/componentes/IndicadorMargemLucro";
 import IndicadorPontoEquilibrio from "@/app/componentes/IndicadorPontoEquilibrio";
+import ReceitaVsDespesas from "@/app/componentes/ReceitaVsDespesas";
 import TabelaResumo from "@/app/componentes/TabelaResumo"
 import { buscarTransacaoEmpresa } from "@/lib/api";
 
@@ -34,6 +35,7 @@ export default async function PaginaAnalise({ params }: Props) {
                 <IndicadorPontoEquilibrio id={id}></IndicadorPontoEquilibrio>
             </div>
             <CrescimentoReceita id={id}></CrescimentoReceita>
+            <ReceitaVsDespesas id={id}></ReceitaVsDespesas>
         </div>
     )
 }
