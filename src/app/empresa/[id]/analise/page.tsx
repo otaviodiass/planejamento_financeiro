@@ -25,7 +25,7 @@ async function buscarTransacao(id: string) {
 }
 
 export default async function PaginaAnalise({ params }: Props) {
-    const { id } = await params
+    const { id } = params
     return (
         <div>
             <TabelaResumo id={id}></TabelaResumo>
