@@ -55,7 +55,7 @@ export default function TabelaResumo({ id }: Props) {
 
     return (
         <div className='m-8'>
-            <h2 className="text-2xl font-bold mb-6 text-blue-800">Resumo</h2>
+            <h2 className="text-2xl font-bold mb-6 text-blue-800">DRE Simplificada</h2>
             <div className='w-full overflow-x-auto rounded-xl shadow-md border border-gray-200'>
                 <table className="w-full table-auto divide-y divide-gray-200">
                     <thead className='bg-gray-100'>
