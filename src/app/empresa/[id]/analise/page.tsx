@@ -6,9 +6,9 @@ import ReceitaVsDespesas from "@/app/componentes/ReceitaVsDespesas";
 import TabelaResumo from "@/app/componentes/TabelaResumo"
 import { buscarTransacaoEmpresa } from "@/lib/api";
 
-interface Props {
-    params: { id: string }
-}
+// interface Props {
+//     params: { id: string }
+// }
 
 interface Transacao {
     id: number,
@@ -24,7 +24,7 @@ async function buscarTransacao(id: string) {
     return data.transacoes
 }
 
-export default async function PaginaAnalise({ params }: Props) {
+export default async function PaginaAnalise({params,}: { params: { id: string };}) {
     const { id } = params
     return (
         <div>
