@@ -12,8 +12,8 @@ interface Empresa {
 }
 
 async function buscaEmpresa(id: any) {
-
-    const response = await fetch(`http://localhost:3000/api/empresa/${id}`)
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+    const response = await fetch(`${baseUrl}/api/empresa/${id}`, { cache: 'no-store' })
     const data: { message: string; empresa: Empresa } = await response.json()
 
     const empresaSelecionada = data.empresa

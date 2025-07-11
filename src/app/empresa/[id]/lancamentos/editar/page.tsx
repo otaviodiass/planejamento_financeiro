@@ -31,7 +31,8 @@ export default function PaginaEdicaoLancamentos({ params }: Props) {
     async function fetchDados() {
       try {
         setLoading(true)
-        const res = await fetch(`http://localhost:3000/api/empresa/${id}/lancamentos`, { cache: "no-store" })
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+        const res = await fetch(`${baseUrl}/api/empresa/${id}/lancamentos`, { cache: "no-store" })
         if (!res.ok) throw new Error('Erro ao buscar transações')
         const json = await res.json()
         setDados(json.transacoes)

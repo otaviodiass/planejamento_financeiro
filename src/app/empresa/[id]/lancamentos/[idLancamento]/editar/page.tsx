@@ -24,6 +24,8 @@ interface Transacao {
   subcategoriaId: number
 }
 
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
 export default function EditarLancamento() {
   const router = useRouter()
   const params = useParams()
@@ -43,19 +45,19 @@ export default function EditarLancamento() {
 
   useEffect(() => {
     async function carregarCategorias() {
-      const res = await fetch("http://localhost:3000/api/categoria")
+      const res = await fetch(`${baseUrl}/api/categoria`)
       const json = await res.json()
       setCategorias(json.categorias)
     }
 
     async function carregarSubcategorias() {
-      const res = await fetch("http://localhost:3000/api/subcategoria")
+      const res = await fetch(`${baseUrl}/api/subcategoria`)
       const json = await res.json()
       setSubcategorias(json.subcategorias)
     }
 
     async function carregarTransacao() {
-      const res = await fetch(`http://localhost:3000/api/empresa/${id}/lancamentos/${idLancamento}`)
+      const res = await fetch(`${baseUrl}/api/empresa/${id}/lancamentos/${idLancamento}`)
       if (res.ok) {
         const json = await res.json()
         const t = json.transacaoSelecionada
@@ -95,7 +97,7 @@ export default function EditarLancamento() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
-    const res = await fetch(`http://localhost:3000/api/empresa/${id}/lancamentos/${idLancamento}`, {
+    const res = await fetch(`${baseUrl}/api/empresa/${id}/lancamentos/${idLancamento}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

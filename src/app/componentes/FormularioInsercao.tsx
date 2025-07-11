@@ -62,6 +62,8 @@ const subCategorias: Record<Tipo, string[]> = {
     ],
 }
 
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
 export default function FormularioInsercao({ params }: { params: { id: string } }) {
     const id = params.id
 
@@ -96,7 +98,7 @@ export default function FormularioInsercao({ params }: { params: { id: string } 
             dataTransacao: formData.get('data')
         }
 
-        const response = await fetch(`http://localhost:3000/api/empresa/${id}/lancamentos`, {
+        const response = await fetch(`${baseUrl}/api/empresa/${id}/lancamentos`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

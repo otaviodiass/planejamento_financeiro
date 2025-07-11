@@ -11,7 +11,9 @@ function Formulario() {
             representante: formData.get('representante'),
         };
 
-        const response = await fetch('http://localhost:3000/api/empresa', {
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
+        const response = await fetch(`${baseUrl}/api/empresa`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

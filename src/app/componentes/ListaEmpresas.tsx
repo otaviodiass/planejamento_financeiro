@@ -10,8 +10,10 @@ interface Empresa {
     representante: string;
 }
 
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
 async function buscarEmpresas() {
-    const response = await fetch(`http://localhost:3000/api/empresa`)
+    const response = await fetch(`${baseUrl}/api/empresa`)
     const data: { message: string; empresas: Empresa[] } = await response.json()
     console.log(data.empresas)
     const listaEmpresas = Array.isArray(data.empresas) ? data.empresas : [];

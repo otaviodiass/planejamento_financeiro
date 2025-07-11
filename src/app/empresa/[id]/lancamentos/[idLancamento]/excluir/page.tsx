@@ -13,6 +13,8 @@ interface Transacao {
   subcategoria: string
 }
 
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
 export default function PaginaExcluirLancamento() {
   const router = useRouter()
   const params = useParams()
@@ -23,7 +25,7 @@ export default function PaginaExcluirLancamento() {
 
   useEffect(() => {
     async function carregarTransacao() {
-      const res = await fetch(`http://localhost:3000/api/empresa/${id}/lancamentos/${idLancamento}`)
+      const res = await fetch(`${baseUrl}/api/empresa/${id}/lancamentos/${idLancamento}`)
       if (res.ok) {
         const json = await res.json()
         console.log('json exluir',json.transacaoSelecionada)
@@ -37,7 +39,7 @@ export default function PaginaExcluirLancamento() {
   }, [id, idLancamento])
 
   async function handleExcluir() {
-    const res = await fetch(`http://localhost:3000/api/empresa/${id}/lancamentos/${idLancamento}`, {
+    const res = await fetch(`${baseUrl}/api/empresa/${id}/lancamentos/${idLancamento}`, {
       method: "DELETE",
     })
 
