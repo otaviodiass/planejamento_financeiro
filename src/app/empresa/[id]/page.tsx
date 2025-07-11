@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import React from 'react';
 
-interface Props {
-    params: { id: string }
-}
+// interface Props {
+//     params: { id: string }
+// }
 
 interface Empresa {
     id: number;
@@ -22,8 +22,8 @@ async function buscaEmpresa(id: any) {
     return { nomeEmpresa, cnpjEmpresa }
 }
 
-export default async function EmpresaPage({ params }: Props) {
-    const {id} = await params
+export default async function EmpresaPage({ params }: any) {
+    const {id} =  params
     const { nomeEmpresa, cnpjEmpresa} = await buscaEmpresa(id)
 
     return (

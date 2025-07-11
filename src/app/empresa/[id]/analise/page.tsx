@@ -24,7 +24,7 @@ async function buscarTransacao(id: string) {
     return data.transacoes
 }
 
-export default async function PaginaAnalise({params,}: { params: { id: string };}) {
+export default async function PaginaAnalise({params}: any) {
     const { id } = params
     return (
         <div>

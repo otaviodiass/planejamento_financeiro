@@ -2,9 +2,9 @@ import TabelaLancamentos from "@/app/componentes/TabelaLancamentos"
 import { buscarTransacaoEmpresa } from "@/lib/api";
 import Link from "next/link";
 
-interface Props {
-    params: { id: string }
-}
+// interface Props {
+//     params: { id: string }
+// }
 
 interface Transacao {
   id: number,
@@ -20,8 +20,8 @@ async function buscarEmpresa(id: string) {
     return data.transacoes
 }
 
-export default async function PaginaLancamentos({ params }: Props) {
-    const { id } = await params
+export default async function PaginaLancamentos({ params }: any) {
+    const { id } = params
     const dados = await buscarEmpresa(id)
     return (
         <div className="flex justify-center">
