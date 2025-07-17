@@ -16,15 +16,17 @@ async function Layout({children, params}: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col bg-[#F9FAFB] text-gray-900">
 <header className="bg-[#1E3A8A] shadow-md">
-  <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
+  <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4 flex-nowrap">
+    {/* Título */}
     <Link href="/">
-      <h1 className="text-xl sm:text-2xl font-bold text-white text-center sm:text-left">
+      <h1 className="text-xl sm:text-2xl font-bold text-white whitespace-nowrap">
         Planejamento Financeiro
       </h1>
     </Link>
 
-    <nav>
-      <ul className="flex flex-col sm:flex-row gap-2 sm:gap-4 items-center sm:items-start">
+    {/* Menu com scroll horizontal */}
+    <div className="overflow-x-auto min-w-0 scroll-invisivel">
+      <ul className="flex gap-2 whitespace-nowrap">
         <li>
           <BotaoCabecalho empresaId={id} destino="" label="Dados da Empresa" />
         </li>
@@ -38,9 +40,10 @@ async function Layout({children, params}: LayoutProps) {
           <BotaoCabecalho empresaId={id} destino="analise" label="Análise Financeira" />
         </li>
       </ul>
-    </nav>
+    </div>
   </div>
 </header>
+
 
       <main className="flex-grow">{children}</main>
     </div>

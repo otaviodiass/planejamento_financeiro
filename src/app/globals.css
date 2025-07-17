@@ -23,3 +23,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem; /* Padrão de tamanho */
 }
+
+/* globals.css */
+.scroll-invisivel::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-invisivel {
+  -ms-overflow-style: none;  /* IE e Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
