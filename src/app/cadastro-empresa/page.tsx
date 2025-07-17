@@ -68,7 +68,7 @@ function Formulario() {
 
 export default function CadastroEmpresa() {
     return (
-        <div className="flex items-center justify-center min-h-[calc(100vh-5rem)] bg-[#F9FAFB]">
+        <div className="flex items-start justify-center min-h-[calc(100vh-5rem)] bg-[#F9FAFB]">
             <Formulario/>
         </div>
     )

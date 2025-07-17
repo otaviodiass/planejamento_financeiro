@@ -20,7 +20,7 @@ export default function Home() {
 
         <Link href="/cadastro-empresa">
           <button className="rounded-full bg-[#3B82F6] px-8 py-5 text-xl font-semibold text-white hover:bg-[#1D4ED8] transition">
-            Começe Agora
+            Cadastrar Empresa
           </button>
         </Link>
       </main>
