@@ -15,30 +15,32 @@ async function Layout({children, params}: LayoutProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F9FAFB] text-gray-900">
-      <header className="bg-[#1E3A8A] shadow-md">
-        <div className="max-w-screen-xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/">
-            <h1 className="text-2xl font-bold text-white">Planejamento Financeiro</h1>
-          </Link>
+<header className="bg-[#1E3A8A] shadow-md">
+  <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
+    <Link href="/">
+      <h1 className="text-xl sm:text-2xl font-bold text-white text-center sm:text-left">
+        Planejamento Financeiro
+      </h1>
+    </Link>
 
-          <nav>
-            <ul className="flex gap-4">
-              <li>
-                <BotaoCabecalho empresaId={id} destino="" label="Dados da Empresa" />
-              </li>
-              <li>
-                <BotaoCabecalho empresaId={id} destino="inserir-dados" label="Inserir Dados" />
-              </li>
-              <li>
-                <BotaoCabecalho empresaId={id} destino="lancamentos" label="Lançamentos" />
-              </li>
-              <li>
-                <BotaoCabecalho empresaId={id} destino="analise" label="Análise Financeira" />
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+    <nav>
+      <ul className="flex flex-col sm:flex-row gap-2 sm:gap-4 items-center sm:items-start">
+        <li>
+          <BotaoCabecalho empresaId={id} destino="" label="Dados da Empresa" />
+        </li>
+        <li>
+          <BotaoCabecalho empresaId={id} destino="inserir-dados" label="Inserir Dados" />
+        </li>
+        <li>
+          <BotaoCabecalho empresaId={id} destino="lancamentos" label="Lançamentos" />
+        </li>
+        <li>
+          <BotaoCabecalho empresaId={id} destino="analise" label="Análise Financeira" />
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
       <main className="flex-grow">{children}</main>
     </div>

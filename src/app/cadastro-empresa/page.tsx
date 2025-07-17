@@ -28,7 +28,7 @@ function Formulario() {
     return (
         <form 
             onSubmit={handleSubmit} 
-            className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg transition-all">
+            className="bg-white p-8 m-4 rounded-2xl shadow-lg w-full max-w-lg transition-all">
             
             <h2 className="text-center text-2xl font-bold text-[#1E3A8A] mb-6">Cadastro de Empresa</h2>
             
