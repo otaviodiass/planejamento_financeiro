@@ -31,7 +31,7 @@ export default function IndicadorMargemLucro({ id }: Props) {
 
     return (
         <div className='m-4 p-4 border border-blue-300 rounded-lg shadow-sm bg-blue-50 text-center w-full max-w-md mx-auto'>
-            <h2 className='text-lg font-bold text-blue-800 mb-1'>Margem de Lucro Anual</h2>
+            <h2 className='text-lg font-bold text-blue-800 mb-1'>Margem de Lucro</h2>
             <p className={`text-2xl font-semibold ${margemLucro > 0 ? 'text-green-600' : 'text-red-600'}`}>
                 {margemLucro.toFixed(2)}%
             </p>

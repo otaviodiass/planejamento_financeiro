@@ -39,7 +39,7 @@ export default function IndicadorPontoEquilibrio({ id }: Props) {
     // )
     return (
     <div className="m-4 p-4 border border-blue-300 rounded-lg shadow-sm bg-blue-50 text-center w-full max-w-md mx-auto">
-        <h2 className="text-lg font-bold text-blue-800 mb-1">Ponto de Equilíbrio Anual</h2>
+        <h2 className="text-lg font-bold text-blue-800 mb-1">Ponto de Equilíbrio</h2>
         <p className="text-2xl font-semibold text-blue-700">
             {pontoEquilibrio.toLocaleString('pt-BR', {
                 style: 'currency',

@@ -41,7 +41,7 @@ export default function GraficoAnalise({ id }: Props) {
   }, [id])
 
   return (
-    <div className="m-10">
+    <div className="p-4 border border-blue-200 bg-blue-50 rounded-xl shadow-md m-8">
       <h2 className="text-xl font-semibold text-blue-800 mb-4">Receita x Resultado Operacional</h2>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={dados}>
