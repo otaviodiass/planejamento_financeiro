@@ -144,7 +144,7 @@ export default function PaginaEdicaoLancamentos({ params }: Props) {
           {dadosFiltrados.length === 0 && (
             <tr>
               <td colSpan={6} className="text-center py-4 text-gray-500">
-                Nenhuma transação encontrada para os filtros selecionados.
+                Nenhuma lançamento encontrado para os filtros selecionados.
               </td>
             </tr>
           )}

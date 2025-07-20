@@ -31,7 +31,7 @@ export default function PaginaExcluirLancamento() {
         console.log('json exluir',json.transacaoSelecionada)
         setTransacao(json.transacaoSelecionada)
       } else {
-        alert("Erro ao carregar transação")
+        alert("Erro ao carregar lançamento")
       }
     }
 
@@ -44,10 +44,10 @@ export default function PaginaExcluirLancamento() {
     })
 
     if (res.ok) {
-      alert("Transação excluída com sucesso")
+      alert("Lançamento excluído com sucesso")
       router.push(`/empresa/${id}/lancamentos/editar`)
     } else {
-      alert("Erro ao excluir transação")
+      alert("Erro ao excluir lançamento")
     }
   }
 
@@ -61,7 +61,7 @@ export default function PaginaExcluirLancamento() {
 
   return (
     <div className="max-w-xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6 text-center text-red-600">Excluir Transação</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center text-red-600">Excluir Lançamento</h1>
 
       <div className="space-y-2 border rounded p-4 mb-6 bg-gray-50">
         <p><strong>Categoria:</strong> {transacao.categoria}</p>

@@ -69,7 +69,7 @@ export default function EditarLancamento() {
         setSubcategoriaId(t.subcategoriaId)
         setCategoriaId(t.categoriaId)
       } else {
-        alert("Erro ao carregar transação")
+        alert("Erro ao carregar lançamento")
       }
     }
 
@@ -111,10 +111,10 @@ export default function EditarLancamento() {
     })
 
     if (res.ok) {
-      alert("Transação atualizada com sucesso")
+      alert("Lançamento atualizado com sucesso")
       router.push(`/empresa/${id}/lancamentos/editar`)
     } else {
-      alert("Erro ao atualizar transação")
+      alert("Erro ao atualizar lançamento")
     }
   }
 
@@ -124,7 +124,7 @@ export default function EditarLancamento() {
 
   return (
     <div className="max-w-xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Editar Transação</h1>
+      <h1 className="text-2xl font-bold mb-4">Editar Lançamento</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

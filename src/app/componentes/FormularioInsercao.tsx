@@ -109,10 +109,10 @@ export default function FormularioInsercao({ params }: { params: { id: string } 
         const result = await response.json()
 
         if (response.ok) {
-            setMensagem('Transação inserida com sucesso')
+            setMensagem('Lançamento inserido com sucesso')
             setTipoMensagem('sucesso')
         } else {
-            setMensagem('Erro ao inserir transação. Tente novamente.')
+            setMensagem('Erro ao inserir Lançamento. Tente novamente.')
             setTipoMensagem('erro')
         }
     }
@@ -151,7 +151,7 @@ export default function FormularioInsercao({ params }: { params: { id: string } 
                 onSubmit={handleSubmit}
                 className='space-y-6 p-6 bg-white shadow rounded-md max-w-md mx-auto mt-10'
             >
-                <h2 className='text-2xl font-bold text-center '>Inserir Transação</h2>
+                <h2 className='text-2xl font-bold text-center '>Inserir Lançamento</h2>
 
                 <div>
                     <label htmlFor='tipo' className='block font-medium mb-1'>Tipo</label>

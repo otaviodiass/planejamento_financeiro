@@ -29,7 +29,7 @@ async function Layout({ children, params }: LayoutProps) {
                 <BotaoCabecalho empresaId={id} destino="" label="Dados da Empresa" />
               </li>
               <li>
-                <BotaoCabecalho empresaId={id} destino="inserir-dados" label="Inserir Dados" />
+                <BotaoCabecalho empresaId={id} destino="inserir-dados" label="Inserir Lançamento" />
               </li>
               <li>
                 <BotaoCabecalho empresaId={id} destino="lancamentos" label="Lançamentos" />
