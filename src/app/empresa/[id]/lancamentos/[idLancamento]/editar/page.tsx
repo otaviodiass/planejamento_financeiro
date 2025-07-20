@@ -119,7 +119,7 @@ export default function EditarLancamento() {
   }
 
   if (!transacao) {
-    return <p>Carregando...</p>
+    return <p className="p-6 text-center">Carregando...</p>
   }
 
   return (
@@ -200,7 +200,7 @@ export default function EditarLancamento() {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
         >
           Salvar Alterações
         </button>

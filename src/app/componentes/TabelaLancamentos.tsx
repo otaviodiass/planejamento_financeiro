@@ -62,10 +62,10 @@ export default function TabelaTransposta({ dados }: TabelaTranspostaProps) {
                       </th>
                     ))}
                     <th className="px-6 py-4 text-center text-sm font-bold text-gray-600">
-                      Total Anual
+                      Média Anual
                     </th>
                     <th className="px-6 py-4 text-center text-sm font-bold text-gray-600">
-                      Média Anual
+                      Total Anual
                     </th>
                   </tr>
                 </thead>
@@ -93,15 +93,18 @@ export default function TabelaTransposta({ dados }: TabelaTranspostaProps) {
                             </td>
                           )
                         })}
-                        <td className={`px-6 py-3 text-sm font-semibold text-center ${totalAnual > 0 ? cor : 'text-gray-400'}`}>
-                          {totalAnual > 0
-                            ? totalAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-                            : '-'}
-                        </td>
-
+                        
+                        {/* Média */}
                         <td className={`px-6 py-3 text-sm font-semibold text-center ${totalMedia > 0 ? cor : 'text-gray-400'}`}>
                           {totalMedia > 0
                             ? totalMedia.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+                            : '-'}
+                        </td>
+
+                        {/* Total */}
+                        <td className={`px-6 py-3 text-sm font-semibold text-center ${totalAnual > 0 ? cor : 'text-gray-400'}`}>
+                          {totalAnual > 0
+                            ? totalAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
                             : '-'}
                         </td>
                       </tr>
@@ -123,6 +126,15 @@ export default function TabelaTransposta({ dados }: TabelaTranspostaProps) {
                         </td>
                       )
                     })}
+                    {/* Média */}
+                    <td className={`px-6 py-3 text-sm text-center font-bold ${cor}`}>
+                      {(porTipo.reduce((acc, l) => acc + l.valor, 0) / mesesOrdenados.length).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
+                    </td>
+
+                    {/* Total */}
                     <td className={`px-6 py-3 text-sm text-center font-bold ${cor}`}>
                       {porTipo.reduce((acc, l) => acc + l.valor, 0).toLocaleString('pt-BR', {
                         style: 'currency',
@@ -130,12 +142,6 @@ export default function TabelaTransposta({ dados }: TabelaTranspostaProps) {
                       })}
                     </td>
 
-                    <td className={`px-6 py-3 text-sm text-center font-bold ${cor}`}>
-                      {(porTipo.reduce((acc, l) => acc + l.valor, 0) / mesesOrdenados.length).toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL',
-                      })}
-                    </td>
                   </tr>
                 </tbody>
               </table>

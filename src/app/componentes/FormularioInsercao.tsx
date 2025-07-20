@@ -225,7 +225,7 @@ export default function FormularioInsercao({ params }: { params: { id: string } 
                     </input>
                 </div>
 
-                <button className="w-full bg-[#1E3A8A] text-white text-lg font-semibold py-3 px-4 rounded-lg hover:bg-[#3B82F6] transition-colors duration-300">
+                <button className="w-full bg-[#1E3A8A] text-white text-lg font-semibold py-3 px-4 rounded-lg hover:bg-[#3B82F6] transition-colors duration-300 cursor-pointer">
                     Enviar
                 </button>
             </form>
